@@ -1,0 +1,4 @@
+python-frontmatter
+jira
+PythonConfluenceAPI
+Markdown
