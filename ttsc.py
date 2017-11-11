@@ -41,6 +41,8 @@ def parseArgs(args):
     g_update_title = args.title_update
 
 def jira(url, metadata):
+    if metadata['jira_id'] is None:
+        return
     options = {
     'server': g_jira_url}
     jira = JIRA(options,basic_auth=(g_user, g_pass))    # a username/password tuple
