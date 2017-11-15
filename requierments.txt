@@ -2,3 +2,4 @@ python-frontmatter
 jira
 PythonConfluenceAPI
 Markdown
+future

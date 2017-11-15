@@ -51,8 +51,13 @@ def jira(url, metadata):
     issue = jira.issue(metadata['jira_id'])
     
     addedContent = metadata['jira_prefix'] + ' ' + url
+
+    new_description = addedContent
+
+    if issue.fields.description is not None:
+        new_description = issue.fields.description + '\n' + addedContent
     #jira.add_comment(issue, addedContent)
-    issue.update(notify=False, description=issue.fields.description + '\n' + addedContent)
+    issue.update(notify=False, description=new_description)
 
 
 def confluence(html, metadata):
@@ -82,16 +87,17 @@ def confluence(html, metadata):
     if (metadata['title'] is not None) and (not update_content):
         content = api.get_content(title = metadata['title'])
         if content is not None:
-            if g_update_title:
-                update_content = True
-                found_id = content['results'][0]['id']
-                found_post = api.get_content_by_id(found_id)
-                if found_post is not None:
-                    current_history = found_post['version']['number']
-                    update_content_id = found_id
-                logging.info('Updating duplicate Title')
-            else:
-                raise Exception('Title is found but not updating')
+            if content['size'] > 0:
+                if g_update_title:
+                    update_content = True
+                    found_id = content['results'][0]['id']
+                    found_post = api.get_content_by_id(found_id)
+                    if found_post is not None:
+                        current_history = found_post['version']['number']
+                        update_content_id = found_id
+                    logging.info('Updating duplicate Title')
+                else:
+                    raise Exception('Title is found but not updating')
     
     if not update_content:
         post_content = {
