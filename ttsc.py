@@ -153,7 +153,7 @@ def main(args):
         logging.critical('File must start with front matter')
         return 1
     
-    html = markdown.markdown(post.content)
+    html = markdown.markdown(post.content,['markdown.extensions.extra'])
     
     try:
         url = confluence(html, post.metadata)
