@@ -14,6 +14,7 @@ g_user = ''
 g_pass = ''
 g_fileName = ''
 g_update_title = False
+g_add_rtl = False
 
 def parseArgs(args):
     global g_jira_url
@@ -28,6 +29,7 @@ def parseArgs(args):
     parser.add_argument('-u','--user', help='Confluence and Jira username', required=True)
     parser.add_argument('-p','--password', help='Confluence and Jira password', required=True)
     parser.add_argument('-tu','--title-update', help='update if title is not unique', action='store_true')
+    parser.add_argument('-rtl','--add-rtl', help='Add rtl related things to markdown', action='store_true')
     parser.add_argument('filename', help='Markdown Filename to process')
     
 
@@ -39,6 +41,7 @@ def parseArgs(args):
     g_pass = args.password
     g_fileName = args.filename
     g_update_title = args.title_update
+    g_add_rtl = args.add_rtl
 
 def jira(url, metadata):
     if metadata['jira_id'] is None:
@@ -152,7 +155,10 @@ def main(args):
     if post.metadata is None or len(post.metadata) == 0:
         logging.critical('File must start with front matter')
         return 1
-    
+
+    if g_add_rtl:
+        post.content = '<div style="direction: rtl;" markdown="1">' + post.content + '</div>'
+
     html = markdown.markdown(post.content,['markdown.extensions.extra'])
     
     try:
