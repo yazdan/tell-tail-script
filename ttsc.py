@@ -23,6 +23,7 @@ def parseArgs(args):
     global g_pass
     global g_fileName
     global g_update_title
+    global g_add_rtl
     parser = argparse.ArgumentParser(description='Sends markdown text to jira and confluence.')
     parser.add_argument('-j','--jira', help='Jira URL', required=True)
     parser.add_argument('-c','--confluence', help='Confluence URL', required=True)
