@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import argparse
+import configargparse
 from jira import JIRA
 from PythonConfluenceAPI import ConfluenceAPI
 import json
@@ -24,7 +24,7 @@ def parseArgs(args):
     global g_fileName
     global g_update_title
     global g_add_rtl
-    parser = argparse.ArgumentParser(description='Sends markdown text to jira and confluence.')
+    parser = configargparse.ArgParser(description='Sends markdown text to jira and confluence.',default_config_files=['ttsc.conf'])
     parser.add_argument('-j','--jira', help='Jira URL', required=True)
     parser.add_argument('-c','--confluence', help='Confluence URL', required=True)
     parser.add_argument('-u','--user', help='Confluence and Jira username', required=True)
@@ -156,9 +156,12 @@ def main(args):
     if post.metadata is None or len(post.metadata) == 0:
         logging.critical('File must start with front matter')
         return 1
-
     if g_add_rtl:
         post.content = '<div style="direction: rtl;" markdown="1">' + post.content + '</div>'
+
+    if post.metadata['confluence_macros'] is not None:
+        post.content = post.content  + post.metadata['confluence_macros']
+        
 
     html = markdown.markdown(post.content,['markdown.extensions.extra'])
     

@@ -3,3 +3,5 @@ jira
 PythonConfluenceAPI
 Markdown
 future
+pbr
+ConfigArgParse

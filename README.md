@@ -25,14 +25,14 @@ It is assumed that all files are in Markdown format wi TOML header as metadata c
 - Confluence Parent id(`confluence_parent_id`): This also can be null
 - Confluence Space id(`confluence_space`): This cannot be null
 - Title(`title`)
+- Atachments(`confluence_attachements`): List of attachements but this is not implemented
+- Confluence xhmtl marckup for macro(`confluence_macros`): you need to know xhtml markup for macro, I myself mostly need list of attachments(`<p><ac:structured-macro ac:name="attachments" ac:schema-version="1" ac:macro-id="2f049522-b9bf-4d90-8281-c1065d443c8b" /></p>`)
 
-
-There are follwoing cmd options
+Parameters can be provided by cmd(see `ttsc.conf.sample`), file, environment variables:
 
 - jira url
 - confluence url
 - username
 - passowrd
 - title-update
-
-
+- add-rtl : adds needed markup for rtl handling

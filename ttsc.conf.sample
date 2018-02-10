@@ -1,0 +1,4 @@
+jira: 'jira.example.com'
+confluence: 'confluence.example.com'
+user: 'user'
+password: 'pass'
