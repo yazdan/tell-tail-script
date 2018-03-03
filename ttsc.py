@@ -159,8 +159,9 @@ def main(args):
     if g_add_rtl:
         post.content = '<div style="direction: rtl;" markdown="1">' + post.content + '</div>'
 
-    if post.metadata['confluence_macros'] is not None:
-        post.content = post.content  + post.metadata['confluence_macros']
+    if 'confluence_macros' in post.metadata:
+        if post.metadata['confluence_macros'] is not None:
+            post.content = post.content  + post.metadata['confluence_macros']
         
 
     html = markdown.markdown(post.content,['markdown.extensions.extra'])
