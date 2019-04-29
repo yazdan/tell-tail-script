@@ -1,7 +1,7 @@
 python-frontmatter
 jira
 PythonConfluenceAPI
-Markdown
+Markdown==2.6.11
 future
 pbr
 ConfigArgParse
