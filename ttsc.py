@@ -164,7 +164,7 @@ def main(args):
             post.content = post.content  + post.metadata['confluence_macros']
         
 
-    html = markdown.markdown(post.content,['markdown.extensions.extra'])
+    html = markdown.markdown(post.content,extensions = ['markdown.extensions.extra'])
     
     try:
         url = confluence(html, post.metadata)
