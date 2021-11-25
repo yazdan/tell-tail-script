@@ -16,6 +16,7 @@ g_fileName = ''
 g_update_title = False
 g_add_rtl = False
 
+# Parsing arguments
 def parseArgs(args):
     global g_jira_url
     global g_confluence_url
